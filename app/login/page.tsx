@@ -1,41 +1,41 @@
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import React from 'react';
+import Image from 'next/image';
+import { AuthForm } from '@/app/login/AuthForm';
+
 const Login = () => {
   return (
-    <div className=" flex-auto	 flex items-center	 justify-center">
-      <div className="">
-        <div className="">Sign in</div>
-        <Card className="w-[350px]">
-          <CardHeader>
-            <CardTitle>Create project</CardTitle>
-            <CardDescription>
-              Deploy your new project in one-click.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form>
-              <div className="grid w-full items-center gap-4">
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" placeholder="Name of your project" />
-                </div>
-              </div>
-            </form>
-          </CardContent>
-          <CardFooter className="flex justify-between">
-            <Button variant="outline">Cancel</Button>
-            <Button>Deploy</Button>
-          </CardFooter>
-        </Card>
+    <div
+      className='container relative hidden h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0'>
+      <div className='relative hidden h-full flex-col bg-muted text-white dark:border-r lg:flex'>
+        <Image src='/login_bg.jpg' alt={'bg'} layout={'fill'} objectFit={'cover'} />
+      </div>
+      <div>
+        <div
+          className=' mx-auto flex w-full px-8 py-6 flex-col justify-center space-y-6 sm:w-[400px] border rounded-lg shadow-2xl'>
+          <div className=' flex flex-col space-y-2 text-center'>
+            <h1 className='text-2xl font-semibold tracking-tight'>
+              Welcome to Cyberlogitec
+            </h1>
+            <p className='text-sm text-muted-foreground'>
+              Delivering services contribute to the customer’s business through self innovation and creativity
+            </p>
+          </div>
+          <AuthForm />
+          <p className='px-8 text-center text-sm text-muted-foreground'>
+            <span
+              className='underline underline-offset-4 hover:text-primary'
+            >
+                Terms of Service
+              </span>{' '}
+            and{' '}
+            <span
+              className='underline underline-offset-4 hover:text-primary'
+            >
+                Privacy Policy
+              </span>
+            .
+          </p>
+        </div>
       </div>
     </div>
   );

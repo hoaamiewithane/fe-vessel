@@ -22,7 +22,7 @@ import Image from 'next/image';
 import React from 'react';
 
 const Header = () => {
-  const { setTheme, theme } = useTheme();
+  const { setTheme } = useTheme();
 
   const components: { title: string; description: string }[] = [
     {
@@ -60,8 +60,8 @@ const Header = () => {
             )}
             {...props}
           >
-            <div className="text-sm font-medium leading-none">{title}</div>
-            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            <div className='text-sm font-medium leading-none'>{title}</div>
+            <p className='line-clamp-2 text-sm leading-snug text-muted-foreground'>
               {children}
             </p>
           </a>
@@ -72,16 +72,16 @@ const Header = () => {
   ListItem.displayName = 'ListItem';
 
   return (
-    <header className="py-7 border-b">
-      <div className="mx-40 flex items-center	justify-between">
-        <div className="flex gap-20">
-          <Image src="/logo.svg" alt="Logo" width={176} height={44} priority />
+    <header className='py-7 border-b'>
+      <div className='mx-40 flex items-center	justify-between'>
+        <div className='flex gap-20'>
+          <Image src='/logo.svg' alt='Logo' width={176} height={44} priority />
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger>User management</NavigationMenuTrigger>
+                <NavigationMenuTrigger>User</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                  <ul className='grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] '>
                     {components.map((component) => (
                       <ListItem key={component.title} title={component.title}>
                         {component.description}
@@ -92,9 +92,9 @@ const Header = () => {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Vessel management</NavigationMenuTrigger>
+                <NavigationMenuTrigger>Vessel</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                  <ul className='grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] '>
                     {components.map((component) => (
                       <ListItem key={component.title} title={component.title}>
                         {component.description}
@@ -121,13 +121,15 @@ const Header = () => {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon">
-              <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Toggle theme</span>
+            <Button variant='outline' size='icon'>
+              <SunIcon
+                className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
+              <MoonIcon
+                className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
+              <span className='sr-only'>Toggle theme</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align='end'>
             <DropdownMenuItem onClick={() => setTheme('light')}>
               Light
             </DropdownMenuItem>
