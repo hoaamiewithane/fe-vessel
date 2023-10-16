@@ -1,14 +1,13 @@
-import { ThemeProvider } from '@/components/theme-provider';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import React from 'react';
-import './globals.css';
+import Header from '../shared/Header';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Cyber logitec',
-  description: 'Cyber logitec',
+  title: 'User management',
+  description: 'User management',
 };
 
 export default function RootLayout({
@@ -19,12 +18,8 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute='class'
-          enableSystem={false}
-        >
-          {children}
-        </ThemeProvider>
+        <Header />
+        {children}
       </body>
     </html>
   );

@@ -5,9 +5,9 @@ import { AuthForm } from '@/app/login/AuthForm';
 const Login = () => {
   return (
     <div
-      className='container relative hidden h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0'>
+      className='container relative hidden  h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0'>
       <div className='relative hidden h-full flex-col bg-muted text-white dark:border-r lg:flex'>
-        <Image src='/login_bg.jpg' alt={'bg'} layout={'fill'} objectFit={'cover'} />
+        <Image src='/login_bg.jpg' alt={'login_bg'} layout={'fill'} objectFit={'cover'} />
       </div>
       <div>
         <div
@@ -25,14 +25,14 @@ const Login = () => {
             <span
               className='underline underline-offset-4 hover:text-primary'
             >
-                Terms of Service
-              </span>{' '}
+              Terms of Service
+            </span>{' '}
             and{' '}
             <span
               className='underline underline-offset-4 hover:text-primary'
             >
-                Privacy Policy
-              </span>
+              Privacy Policy
+            </span>
             .
           </p>
         </div>

@@ -1,10 +1,10 @@
+import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import * as React from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 
 const formSchema = z.object({
@@ -24,8 +24,11 @@ const LoginForm = () => {
       password: '',
     },
   });
+
+  const router = useRouter()
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log(values);
+    router.push('/user')
   };
 
   return (<Form {...form}>

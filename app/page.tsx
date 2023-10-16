@@ -1,9 +1,11 @@
-import { Button } from '@/components/ui/button'
+'use client'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function Home() {
-  return (
-    <main>
-      <Button >hello</Button>
-    </main>
-  )
+  const router = useRouter()
+  useEffect(() => {
+    router.replace('/user')
+  }, [])
+  return null
 }
