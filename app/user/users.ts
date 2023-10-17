@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 export const users = Array.from(Array(100).keys()).map(i => ({
+  id: i+1,
   username: `user-${i + 1}`,
   email: `boy${i + 1}balls@gmail.com`,
   firstName: `first name ${i + 1}`,

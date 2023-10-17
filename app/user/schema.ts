@@ -1,6 +1,7 @@
 import { z } from "zod"
 
 export const taskSchema = z.object({
+  id: z.number(),
   email:z.string(),
   username: z.string().nullable(),
   firstName: z.string().nullable(),
@@ -11,4 +12,4 @@ export const taskSchema = z.object({
   role:z.string()
 })
 
-export type Task = z.infer<typeof taskSchema>
+export type User = z.infer<typeof taskSchema>

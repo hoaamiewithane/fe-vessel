@@ -26,7 +26,7 @@ export function SiteHeader() {
                 "w-9 px-0 cursor-pointer"
               )}
             >
-              <Icons.noti className="h-4 w-4" />
+              <Icons.noti />
             </div>
             <ModeToggle />
           </nav>

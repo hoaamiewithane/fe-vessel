@@ -6,9 +6,9 @@ import { Badge } from "@/components/ui/badge"
 import { labels } from "./data"
 import { DataTableColumnHeader } from "./data-table-column-header"
 import { DataTableRowActions } from "./data-table-row-actions"
-import { Task } from "./schema"
+import { User } from "./schema"
 
-export const columns: ColumnDef<Task>[] = [
+export const columns: ColumnDef<User>[] = [
 
   {
     accessorKey: "email",
@@ -44,7 +44,6 @@ export const columns: ColumnDef<Task>[] = [
     ),
     cell: ({ row }) => {
       const label = labels.find((label) => label.value === row.original.bio)
-
       return (
         <div className="flex space-x-2">
           {label && <Badge variant="outline">{label.label}</Badge>}
@@ -54,6 +53,7 @@ export const columns: ColumnDef<Task>[] = [
         </div>
       )
     },
+    enableSorting: false,
   },
   {
     accessorKey: "role",
@@ -70,6 +70,21 @@ export const columns: ColumnDef<Task>[] = [
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
     },
+    enableSorting: false,
+  },
+  {
+    accessorKey: "updateAt",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Update at" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex items-center">
+          {row.getValue("updateAt")}
+        </div>
+      )
+    },
+    enableSorting: false,
   },
   {
     accessorKey: "createAt",
@@ -88,20 +103,7 @@ export const columns: ColumnDef<Task>[] = [
     },
   },
   {
-    accessorKey: "updateAt",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Update at" />
-    ),
-    cell: ({ row }) => {
-      return (
-        <div className="flex items-center">
-          {row.getValue("updateAt")}
-        </div>
-      )
-    },
-  },
-  {
     id: "actions",
-    cell: ({ row }) => <div className="flex justify-end pr-4"><DataTableRowActions row={row} /></div>,
+    cell: ({ row }) => <div className="flex justify-end pr-4"><DataTableRowActions id={row.original.id} /></div>,
   },
 ]
