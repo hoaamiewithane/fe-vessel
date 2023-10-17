@@ -23,7 +23,7 @@ export default function UserNav() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar className='cursor-pointer	'>
+        <Avatar className='cursor-pointer '>
           <AvatarFallback>SC</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
