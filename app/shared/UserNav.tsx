@@ -24,7 +24,6 @@ export default function UserNav() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className='cursor-pointer	'>
-          <AvatarImage src="/avatars/01.png" alt="@shadcn" />
           <AvatarFallback>SC</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
