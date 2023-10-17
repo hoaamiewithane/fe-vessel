@@ -71,6 +71,7 @@ export const columns: ColumnDef<User>[] = [
       return value.includes(row.getValue(id))
     },
     enableSorting: false,
+    enableHiding: false,
   },
   {
     accessorKey: "updateAt",
@@ -101,6 +102,7 @@ export const columns: ColumnDef<User>[] = [
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
     },
+    enableHiding: false,
   },
   {
     id: "actions",
