@@ -1,7 +1,5 @@
-import React from 'react'
-import { ProfileForm } from './components/profile-form'
-import { Separator } from '@/components/ui/separator'
 import { AccountForm } from './components/account-form'
+import { ProfileForm } from './components/profile-form'
 
 const Profile = () => {
   return (
@@ -12,10 +10,16 @@ const Profile = () => {
           This is how others will see you on the site.
         </p>
       </div>
-      <Separator />
       <div className='grid grid-cols-2 gap-8'>
-        <ProfileForm />
-        <AccountForm />
+        <div className='border rounded-md p-8 shadow-md'>
+          <h3 className="text-lg font-medium mb-4">Your information</h3>
+          <ProfileForm />
+        </div>
+        <div className='border rounded-md p-8 shadow-md'>
+          <h3 className="text-lg font-medium mb-4">Change password</h3>
+          <AccountForm />
+        </div>
+
       </div>
     </div>
   )

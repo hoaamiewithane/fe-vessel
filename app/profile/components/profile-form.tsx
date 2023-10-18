@@ -16,13 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { Button } from "@/components/ui/button"
@@ -89,7 +83,7 @@ export function ProfileForm() {
               </FormControl>
               <FormDescription>
                 This is your public display name. It can be your real name or a
-                pseudonym. You can only change this once every 30 days.
+                pseudonym
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -101,22 +95,9 @@ export function ProfileForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="m@example.com">m@example.com</SelectItem>
-                  <SelectItem value="m@google.com">m@google.com</SelectItem>
-                  <SelectItem value="m@support.com">m@support.com</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormDescription>
-                You can manage verified email addresses in your{" "}
-                <Link href="/examples/forms">email settings</Link>.
-              </FormDescription>
+              <FormControl>
+                <Input disabled placeholder="nguyendanghoaa@gmail.com" {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
@@ -135,7 +116,7 @@ export function ProfileForm() {
                 />
               </FormControl>
               <FormDescription>
-                You can <span>@mention</span> other users and organizations to
+                You can  organizations to
                 link to them.
               </FormDescription>
               <FormMessage />
