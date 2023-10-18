@@ -1,11 +1,12 @@
 import { z } from "zod"
 
-export const taskSchema = z.object({
-  id: z.string(),
+export const vesselSchema = z.object({
+  id: z.number(),
+  vesselName:z.string(),
   title: z.string(),
-  status: z.string(),
+  packageWeight: z.number(),
   label: z.string(),
-  priority: z.string(),
+  owner: z.array(z.string()),
 })
 
-export type Task = z.infer<typeof taskSchema>
+export type Vessel = z.infer<typeof vesselSchema>

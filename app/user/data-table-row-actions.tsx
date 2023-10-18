@@ -95,13 +95,12 @@ export function DataTableRowActions({
           <DialogHeader>
             <DialogTitle>Delete this user</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
+              This action cannot be undone. This will permanently delete your account and remove your data from our servers.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose asChild>
-              <Button type="button" variant="secondary" size={'sm'}>Yes</Button>
-
+              <Button type="button" variant="secondary" size={'sm'}>Continue</Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>

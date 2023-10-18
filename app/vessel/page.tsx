@@ -1,6 +1,6 @@
 import React from 'react'
 import { DataTable } from './components/data-table'
-import { tasks } from './data/tasks'
+import { vessels } from './data/vessels'
 import { columns } from './components/columns'
 
 const Vessel = () => {
@@ -14,7 +14,7 @@ const Vessel = () => {
           </p>
         </div>
       </div>
-      <DataTable data={tasks} columns={columns} />
+      <DataTable data={vessels} columns={columns} />
     </div>
   )
 }

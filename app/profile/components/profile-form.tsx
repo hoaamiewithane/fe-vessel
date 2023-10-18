@@ -30,19 +30,28 @@ const profileFormSchema = z.object({
     .max(30, {
       message: "Username must not be longer than 30 characters.",
     }),
+  firstName: z
+    .string()
+    .min(2, {
+      message: "Username must be at least 2 characters.",
+    })
+    .max(30, {
+      message: "Username must not be longer than 30 characters.",
+    }),
+  lastName: z
+    .string()
+    .min(2, {
+      message: "Username must be at least 2 characters.",
+    })
+    .max(30, {
+      message: "Username must not be longer than 30 characters.",
+    }),
   email: z
     .string({
       required_error: "Please select an email to display.",
     })
     .email(),
   bio: z.string(),
-  urls: z
-    .array(
-      z.object({
-        value: z.string().url({ message: "Please enter a valid URL." }),
-      })
-    )
-    .optional(),
 })
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>
@@ -102,6 +111,34 @@ export function ProfileForm() {
             </FormItem>
           )}
         />
+        <div className="flex gap-4">
+          <FormField
+            control={form.control}
+            name="firstName"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>First name</FormLabel>
+                <FormControl>
+                  <Input placeholder="first name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="lastName"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>Last name</FormLabel>
+                <FormControl>
+                  <Input placeholder="last name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <FormField
           control={form.control}
           name="bio"
