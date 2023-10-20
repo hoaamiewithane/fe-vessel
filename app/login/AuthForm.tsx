@@ -9,7 +9,6 @@ import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
-import { useBoundStore } from '../store';
 
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -18,13 +17,11 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function AuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLogin, setIsLogin] = useState(true);
-  const router = useRouter()
-  const setAuth = useBoundStore(state => state.setAuth)
+  const router = useRouter();
   const handleTglBtn = () => setIsLogin(!isLogin);
   const handleLoginGoogle = () => {
-    setAuth(true)
-    router.push('/user')
-  }
+    router.push('/?token=hoaa');
+  };
   const renderForm = isLogin ? <LoginForm /> : <RegisterForm />;
   const renderContent = isLogin ? <div className={'text-sm text-muted-foreground'}>Don't have account? <span
     className={'underline cursor-pointer'} onClick={handleTglBtn}>Sign up</span>

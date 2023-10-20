@@ -5,6 +5,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useState } from 'react';
+import { Icons } from '@/components/icons';
+import Cookies from 'js-cookie';
 
 
 const formSchema = z.object({
@@ -17,6 +20,7 @@ const formSchema = z.object({
 });
 
 const LoginForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -25,10 +29,14 @@ const LoginForm = () => {
     },
   });
 
-  const router = useRouter()
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    router.push('/user')
+  const router = useRouter();
+  const onSubmit = (_values: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      Cookies.set('token', 'hoaa');
+      router.push('/');
+    }, 1500);
   };
 
   return (<Form {...form}>
@@ -38,7 +46,7 @@ const LoginForm = () => {
         name='email'
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Email:</FormLabel>
+            <FormLabel>Email</FormLabel>
             <FormControl>
               <Input
                 placeholder='name@example.com'
@@ -59,7 +67,7 @@ const LoginForm = () => {
         name='password'
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Password:</FormLabel>
+            <FormLabel>Password</FormLabel>
             <FormControl>
               <Input
                 placeholder='Enter your password'
@@ -74,7 +82,9 @@ const LoginForm = () => {
           </FormItem>
         )}
       />
-      <Button type='submit' className='w-full'>Sign in</Button>
+      <Button type='submit' className='w-full' disabled={isLoading}> {isLoading && (
+        <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
+      )}Sign in</Button>
     </form>
   </Form>);
 };

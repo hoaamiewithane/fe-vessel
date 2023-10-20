@@ -1,8 +1,5 @@
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
+'use client';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,15 +7,38 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu"
-import { useRouter } from "next/navigation"
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { useRouter } from 'next/navigation';
+import { deleteAllCookies } from '@/app/utils';
+import { resetAllSlices, useBoundStore } from '@/app/store';
+import { useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 export default function UserNav() {
-  const router = useRouter()
+  const router = useRouter();
+  const me = useBoundStore(state => state.me);
   const handleLogOut = () => {
-    router.push('/login')
-  }
+    router.push('/login');
+    deleteAllCookies();
+    resetAllSlices();
+  };
+
+  const { setAuth, setMe, auth } = useBoundStore(state => state);
+
+  const handleFetchMe = async () => {
+    setTimeout(() => {
+      setAuth(true);
+      setMe({ email: 'nguyendanghoaa@gmail.com' });
+    }, 1500);
+  };
+  useEffect(() => {
+    const token = Cookies.get('token');
+    if (!auth && token) {
+      console.log('fetch me');
+      handleFetchMe().then();
+    }
+  }, [auth, Cookies.get('token')]);
 
   return (
     <DropdownMenu>
@@ -27,11 +47,11 @@ export default function UserNav() {
           <AvatarFallback>SC</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="center" forceMount>
-        <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">shadcn</p>
-            <p className="text-xs leading-none text-muted-foreground">
+      <DropdownMenuContent className='w-56' align='center' forceMount>
+        <DropdownMenuLabel className='font-normal'>
+          <div className='flex flex-col space-y-1'>
+            <p className='text-sm font-medium leading-none'>{me?.email}</p>
+            <p className='text-xs leading-none text-muted-foreground'>
               m@example.com
             </p>
           </div>
@@ -41,13 +61,6 @@ export default function UserNav() {
           <DropdownMenuItem onClick={() => router.push('/profile')}>
             Profile
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            Billing
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Settings
-          </DropdownMenuItem>
-          <DropdownMenuItem>New Team</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogOut}>
@@ -55,5 +68,5 @@ export default function UserNav() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
