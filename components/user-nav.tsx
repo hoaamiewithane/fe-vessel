@@ -10,7 +10,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useRouter } from 'next/navigation';
-import { deleteAllCookies } from '@/app/utils';
 import { resetAllSlices, useBoundStore } from '@/app/store';
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
@@ -19,8 +18,8 @@ export default function UserNav() {
   const router = useRouter();
   const me = useBoundStore(state => state.me);
   const handleLogOut = () => {
-    router.push('/login');
-    deleteAllCookies();
+    Cookies.remove('token');
+    Cookies.remove('refreshToken');
     resetAllSlices();
   };
 

@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import React, { PropsWithChildren } from 'react';
 import './globals.css';
-import { SiteHeader } from '@/components/site-header';
 import { TanstackProvider } from '@/components/tanstack-provider';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,8 +24,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
         enableSystem={false}
         disableTransitionOnChange
       >
-        <SiteHeader />
-        {children}
+        <ProtectedRoute>
+          {children}
+        </ProtectedRoute>
       </ThemeProvider>
     </TanstackProvider>
 

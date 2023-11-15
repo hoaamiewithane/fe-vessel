@@ -7,7 +7,10 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useState } from 'react';
 import { Icons } from '@/components/icons';
+import { useMutation } from '@tanstack/react-query';
+import httpClient from '@/configs/AxiosClient';
 import Cookies from 'js-cookie';
+import { useBoundStore } from '@/app/store';
 
 
 const formSchema = z.object({
@@ -21,6 +24,22 @@ const formSchema = z.object({
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const setAuth = useBoundStore(state => state.setAuth);
+  const router = useRouter();
+  const { mutate: loginMutation } = useMutation({
+    'mutationFn': (payload: z.infer<typeof formSchema>) => {
+      return httpClient.post<{ accessToken: string, refreshToken: string }>('/auth/sign-in', payload);
+    },
+    'onSuccess': (data) => {
+      setIsLoading(false);
+      Cookies.set('token', data.data['accessToken']);
+      Cookies.set('refreshToken', data.data['refreshToken']);
+      setAuth(true);
+      router.push('/');
+    },
+  });
+
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,14 +48,9 @@ const LoginForm = () => {
     },
   });
 
-  const router = useRouter();
-  const onSubmit = (_values: z.infer<typeof formSchema>) => {
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      Cookies.set('token', 'hoaa');
-      router.push('/');
-    }, 1500);
+    loginMutation(values);
   };
 
   return (<Form {...form}>
