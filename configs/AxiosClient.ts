@@ -2,6 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { resetAllSlices } from '@/app/store';
 
+let refreshTokenRequest: null | Promise<string> = null;
 const updateRefreshToken = async () => {
   const refreshToken = Cookies.get('refreshToken');
   const res = await axios.post<{ accessToken: string }>('/auth/refresh-token', undefined, {
@@ -11,7 +12,6 @@ const updateRefreshToken = async () => {
       ...(refreshToken && { Authorization: `Bearer ${refreshToken}` }),
     },
   });
-  Cookies.set('token', res.data.accessToken);
   return res.data.accessToken;
 };
 
@@ -34,25 +34,26 @@ httpClient.interceptors.request.use(async (value) => {
 httpClient.interceptors.response.use(
   (response) => response,
   async (error) => {
-    let originalConfig = error.config;
-    if (
-      error.response.status === 401 &&
-      !originalConfig.sent
-    ) {
+    const originalConfig = error.config;
+    if (error.response.status === 401 && Cookies.get('refreshToken')) {
+      refreshTokenRequest = refreshTokenRequest || updateRefreshToken();
       try {
-        originalConfig.sent = true;
-        const accessToken = await updateRefreshToken();
+        const accessToken = await refreshTokenRequest;
+        refreshTokenRequest = null;
+        Cookies.set('token', accessToken);
         originalConfig.headers['Authorization'] = `Bearer ${accessToken}`;
         return httpClient(originalConfig);
       } catch (_error) {
         Cookies.remove('token');
         Cookies.remove('refreshToken');
+        window.location.href = '/login';
         return Promise.reject(_error);
       }
     }
     Cookies.remove('token');
     Cookies.remove('refreshToken');
     resetAllSlices();
+    window.location.href = '/login';
 
     return Promise.reject(error);
   },
